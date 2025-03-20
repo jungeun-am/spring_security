@@ -20,7 +20,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-
+                .csrf().disable()
                 .authorizeRequests() // URL 기반 인가 설정
                 .antMatchers("/user/**").hasRole("USER") // USER 권한 사용자만 접근 가능
                 .antMatchers("/admin/**").hasRole("ADMIN")
