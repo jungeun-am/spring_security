@@ -20,7 +20,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf().disable() // CSRF 필터 끔
                 .authorizeRequests() // URL 기반 인가 설정
                 .antMatchers("/user/**").hasRole("USER") // USER 권한 사용자만 접근 가능
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -50,7 +50,7 @@ public class SecurityConfig {
         UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("password")
-                .roles("ADMIN")
+                .roles("ADMIN", "USER") // ADMIN과 USER 권한 가짐
                 .build();
 
         return new InMemoryUserDetailsManager(user, admin);
